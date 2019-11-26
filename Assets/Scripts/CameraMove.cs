@@ -36,7 +36,8 @@ public class CameraMove : MonoBehaviour
     private void LateUpdate() {
         Touch[] myTouches = Input.touches;
 
-        if (Input.touchCount == 1 && !wasClickedOnObject) {
+        if (Input.touchCount == 1 && !wasClickedOnObject && Screen.height / 2 > myTouches[0].position.y) {
+
             Vector2 offSet = myTouches[0].deltaPosition;
             if (offSet.magnitude > 0.2) {
                 currentOffSet -= new Vector3(offSet.x, 0, offSet.y) * Time.deltaTime * sensitivity;

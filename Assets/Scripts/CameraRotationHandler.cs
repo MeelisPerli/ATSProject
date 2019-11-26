@@ -4,49 +4,44 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class CameraRotationHandler : MonoBehaviour
-{
+    {
 
     private Text debugTF;
-    private float directions;
-    public float avgOverTime;
-    private float timeCounter;
-    public float offset;
-    private int count;
 
-    private float lastDir;
-    private float newDir;
 
+
+
+     public float sensitivity; 
 
 
     void Start()
     {
         debugTF = GameObject.Find("DebugCanvas").GetComponentInChildren<Text>();
-        timeCounter = Time.time + avgOverTime;
-        directions = 0;
-        lastDir = 0;
-        newDir = 0;
+
         Input.location.Start();
     }
 
     // Update is called once per frame
     void Update()
     {
-        directions += Input.compass.magneticHeading;
-        count++;
-        if (timeCounter <= Time.time) {
-            lastDir = newDir;
-            newDir = directions / count;
+        Touch[] myTouches = Input.touches;
+      
+        if (Input.touchCount == 1)
+        {
             
+           
+            DisplayOnDBW("aa"+myTouches[0].position.x + " " + myTouches[0].position.y);
+            if (Screen.height/2 < myTouches[0].position.y)
+            {
+                Vector3 offSet = transform.eulerAngles;
+                offSet.y += myTouches[0].deltaPosition.x * Time.deltaTime * sensitivity;
 
-            timeCounter = Time.time + avgOverTime;
-            directions = 0;
-            count = 0;
+                transform.eulerAngles = offSet;
+            }
+            
         }
-        if (lastDir != newDir) {
-            float t = timeCounter - Time.time;
-            transform.rotation = Quaternion.Euler(0, Mathf.LerpAngle(lastDir, newDir, 1 - t / avgOverTime), 0);
-            DisplayOnDBW("a" + (1 - t / avgOverTime));
-        }
+
+
     }
 
 
