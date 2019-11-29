@@ -11,6 +11,7 @@ public class TargetLocTransformer : MonoBehaviour
     public Camera CoreDevice;
     public float Ratio;
 
+    public Slider slider;
 
     // Start is called before the first frame update
     void Start()
@@ -27,7 +28,7 @@ public class TargetLocTransformer : MonoBehaviour
     void moveObject() {
         Vector3 pos = CoreDevice.transform.position;
         pos -= transform.position;
-        pos += target.transform.position * Ratio;
+        pos += target.transform.position * Ratio*slider.value;
         pos.y = CoreDevice.transform.position.y;
         rlTarget.transform.position = pos;
     }

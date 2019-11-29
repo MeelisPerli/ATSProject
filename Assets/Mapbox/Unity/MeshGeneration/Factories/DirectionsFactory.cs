@@ -61,8 +61,8 @@ namespace Mapbox.Unity.MeshGeneration.Factories
 			{
 				modifier.Initialize();
 			}
-            
-            StartCoroutine(QueryTimer());
+
+			StartCoroutine(QueryTimer());
 		}
 
 		protected virtual void OnDestroy()
@@ -98,7 +98,7 @@ namespace Mapbox.Unity.MeshGeneration.Factories
 					}
 				}
 
-                if (_recalculateNext)
+				if (_recalculateNext)
 				{
 					Query();
 					_recalculateNext = false;
@@ -108,14 +108,12 @@ namespace Mapbox.Unity.MeshGeneration.Factories
 
 		void HandleDirectionsResponse(DirectionsResponse response)
 		{
-            Debug.Log(response.Routes);
-
-            if (response == null || null == response.Routes || response.Routes.Count < 1)
+			if (response == null || null == response.Routes || response.Routes.Count < 1)
 			{
 				return;
 			}
-            Debug.Log("aaa");
-            var meshData = new MeshData();
+
+			var meshData = new MeshData();
 			var dat = new List<Vector3>();
 			foreach (var point in response.Routes[0].Geometry)
 			{
@@ -142,7 +140,7 @@ namespace Mapbox.Unity.MeshGeneration.Factories
 			_directionsGO = new GameObject("direction waypoint " + " entity");
 			var mesh = _directionsGO.AddComponent<MeshFilter>().mesh;
 			mesh.subMeshCount = data.Triangles.Count;
-            
+
 			mesh.SetVertices(data.Vertices);
 			_counter = data.Triangles.Count;
 			for (int i = 0; i < _counter; i++)
