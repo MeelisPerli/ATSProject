@@ -10,6 +10,7 @@ namespace Mapbox.Examples
 		private Vector3 screenPoint;
 		private Vector3 offset;
 		private Plane _yPlane;
+        public CameraMove cam;
 
 		public void Start()
 		{
@@ -23,6 +24,7 @@ namespace Mapbox.Examples
 			if (_yPlane.Raycast(ray, out enter))
 			{
 				MoveTarget.position = ray.GetPoint(enter);
+                cam.wasClickedOnObject = true;
 			}
 		}
 	}
