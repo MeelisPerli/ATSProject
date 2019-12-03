@@ -9,7 +9,10 @@ public class PathTransformer : MonoBehaviour
 
     public Camera coreDevice;
     public float ratio;
-    public Slider slider;
+    public float maxSize;
+    public Slider distslider;
+    public Slider sizeSlider;
+
 
     private GameObject pathMesh;
     private DirectionsFactory df;
@@ -36,12 +39,12 @@ public class PathTransformer : MonoBehaviour
                 ARPath.Destroy();
             }
             ARPath = Instantiate(pathMesh);
-            ARPath.transform.localScale = new Vector3(33, 33, 33);
+            ARPath.transform.localScale = new Vector3(sizeSlider.value*maxSize, sizeSlider.value * maxSize, sizeSlider.value * maxSize);
 
             // updating loc
             Vector3 pos = coreDevice.transform.position;
             pos -= transform.position;
-            pos += pathMesh.transform.position * ratio * slider.value;
+            pos += pathMesh.transform.position * ratio * distslider.value;
             pos.y = coreDevice.transform.position.y - 130;
             ARPath.transform.position = pos;
             yield return new WaitForSeconds(1f);

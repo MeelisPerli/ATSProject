@@ -7,12 +7,7 @@ public class CameraRotationHandler : MonoBehaviour
     {
 
     private Text debugTF;
-
-
-
-
-     public float sensitivity; 
-
+    public float sensitivity;
 
     void Start()
     {
@@ -25,12 +20,8 @@ public class CameraRotationHandler : MonoBehaviour
     void Update()
     {
         Touch[] myTouches = Input.touches;
-      
         if (Input.touchCount == 1)
         {
-            
-           
-            DisplayOnDBW("aa"+myTouches[0].position.x + " " + myTouches[0].position.y);
             if (Screen.height/2 < myTouches[0].position.y)
             {
                 Vector3 offSet = transform.eulerAngles;
@@ -38,13 +29,8 @@ public class CameraRotationHandler : MonoBehaviour
 
                 transform.eulerAngles = offSet;
             }
-            
         }
-
-
     }
-
-
 
     private void DisplayOnDBW(string text) {
         debugTF.text = text;
