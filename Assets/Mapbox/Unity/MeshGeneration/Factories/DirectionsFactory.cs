@@ -160,6 +160,10 @@ namespace Mapbox.Unity.MeshGeneration.Factories
 			_directionsGO.AddComponent<MeshRenderer>().material = _material;
 			return _directionsGO;
 		}
+
+        public GameObject getPathObject() {
+            return _directionsGO;
+        }
 	}
 
 }
