@@ -5,26 +5,21 @@ using UnityEngine.UI;
 
 public class MoveCamToUser : MonoBehaviour
 {
-    // Start is called before the first frame update
-    [SerializeField]
-    Mapbox.Unity.Map.AbstractMap _map;
+
 
     [SerializeField]
-    Button _button;
+    Camera cam;
 
     [SerializeField]
-    Transform _mapTransform;
+    Transform user;
 
-    private void Start()
+    [SerializeField]
+    Vector3 offset;
+
+    public void UpdateMapLocation()
     {
-        _button.onClick.AddListener(UpdateMapLocation);
-    }
-
-    private void UpdateMapLocation()
-    {
-        var location = Mapbox.Unity.Location.LocationProviderFactory.Instance.DefaultLocationProvider.CurrentLocation;
-        _map.UpdateMap(location.LatitudeLongitude, _map.AbsoluteZoom);
-        var playerPos = Camera.main.transform.position;
-        _mapTransform.position = new Vector3(playerPos.x, _mapTransform.position.y, playerPos.z);
+        Vector3 pos = user.position + offset;
+        pos.y = cam.transform.position.y;
+        cam.transform.position = pos;
     }
 }

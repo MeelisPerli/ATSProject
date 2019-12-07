@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.4465782, g: 0.49641252, b: 0.5748167, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -339,9 +339,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   user: {fileID: 0}
-  defaultOffSet: {x: 0, y: 108.5, z: -73.8}
   sensitivity: 5
   wasClickedOnObject: 0
+  textField: {fileID: 579838278}
+  startingOffset: {x: 0, y: 0, z: 50}
 --- !u!1 &191702736
 GameObject:
   m_ObjectHideFlags: 0
@@ -841,7 +842,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &579838277
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1147,7 +1148,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: Infinity, y: -Infinity, z: -Infinity, w: -Infinity}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -2357,9 +2358,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dee3e2f44eeb44c429d94add35c83700, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _map: {fileID: 493678986}
-  _button: {fileID: 1406126413}
-  _mapTransform: {fileID: 1577749885}
+  cam: {fileID: 176474937}
+  user: {fileID: 819410513}
+  offset: {x: 0, y: 0, z: -50}
 --- !u!114 &1406126413
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2402,7 +2403,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1406126414}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1406126412}
+        m_MethodName: UpdateMapLocation
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1406126414
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2502,12 +2514,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _map: {fileID: 493678986}
---- !u!4 &1577749885 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4867834046800562, guid: e6b749c6d877f4c19a5a5c3c0783d53b,
-    type: 3}
-  m_PrefabInstance: {fileID: 493678984}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1647953651
 PrefabInstance:
   m_ObjectHideFlags: 0

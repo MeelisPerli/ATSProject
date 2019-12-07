@@ -1,21 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CameraMove : MonoBehaviour
 {
 
     public Transform user;
     private Camera cam;
-    public Vector3 defaultOffSet;
     public float sensitivity;
-    private Vector3 currentOffSet;
     public bool wasClickedOnObject;
     private int layerMask;
+    public Text textField;
+    private Vector3 _deltaVec;
 
     void Start()
     {
-        currentOffSet = defaultOffSet;
         cam = GetComponent<Camera>();
         layerMask = 1 << 9;
         layerMask = ~layerMask;
@@ -23,18 +23,22 @@ public class CameraMove : MonoBehaviour
 
     private void Update() {
         // Movement with WASD keys (just for debugging)
+        _deltaVec.x = 0;
+        _deltaVec.y = 0;
+        _deltaVec.z = 0;
         if (Input.GetKey("w")) {
-            currentOffSet.z += sensitivity * Time.deltaTime * 10;
+            _deltaVec.z += sensitivity * Time.deltaTime * 10;
         }
         if (Input.GetKey("s")) {
-            currentOffSet.z -= sensitivity * Time.deltaTime * 10;
+            _deltaVec.z -= sensitivity * Time.deltaTime * 10;
         }
         if (Input.GetKey("d")) {
-            currentOffSet.x += sensitivity * Time.deltaTime * 10;
+            _deltaVec.x += sensitivity * Time.deltaTime * 10;
         }
         if (Input.GetKey("a")) {
-            currentOffSet.x -= sensitivity * Time.deltaTime * 10;
+            _deltaVec.x -= sensitivity * Time.deltaTime * 10;
         }
+        textField.text = "x: " + transform.position.x + "y: " + transform.position.y + "z: " + transform.position.z;
     }
 
     private void LateUpdate() {
@@ -46,14 +50,14 @@ public class CameraMove : MonoBehaviour
             if (!Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask)) {
                 Vector2 offSet = myTouches[0].deltaPosition;
                 if (offSet.magnitude > 0.2) {
-                    currentOffSet -= new Vector3(offSet.x, 0, offSet.y) * Time.deltaTime * sensitivity;
+                    _deltaVec -= new Vector3(offSet.x, 0, offSet.y) * Time.deltaTime * sensitivity;
                 }
                 // Do something with the object that was hit by the raycast.
             }
             
         }
 
-        transform.position = currentOffSet;
+        transform.position += _deltaVec;
         wasClickedOnObject = false;
     }
 }
