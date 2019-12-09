@@ -48,7 +48,7 @@ public class CameraRotationHandler : MonoBehaviour
     void Update()
     {
         Touch[] myTouches = Input.touches;
-        DisplayOnDBW("Orientation: " + user.eulerAngles.y);
+        DisplayOnDBW("Orientation: x:" + user.eulerAngles.x + "y:" + user.eulerAngles.y + "z:" + user.eulerAngles.z);
         if (Input.touchCount == 1 && isOnManual)
             Manual(myTouches);
     }
