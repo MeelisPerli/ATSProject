@@ -11,7 +11,6 @@ public class CameraMove : MonoBehaviour
     public float sensitivity;
     public bool wasClickedOnObject;
     private int layerMask;
-    public Text textField;
     private Vector3 _deltaVec;
 
     void Start()
@@ -20,6 +19,7 @@ public class CameraMove : MonoBehaviour
         layerMask = 1 << 9;
         layerMask = ~layerMask;
     }
+
 
     private void Update() {
         // Movement with WASD keys (just for debugging)
@@ -38,7 +38,6 @@ public class CameraMove : MonoBehaviour
         if (Input.GetKey("a")) {
             _deltaVec.x -= sensitivity * Time.deltaTime * 10;
         }
-        textField.text = "x: " + transform.position.x + "y: " + transform.position.y + "z: " + transform.position.z;
     }
 
     private void LateUpdate() {
