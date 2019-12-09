@@ -14,33 +14,20 @@ public class CameraRotationHandler : MonoBehaviour
 
     public float distanceDeltaReq;
     public Transform user;
+    public Transform mapMarker;
     public float directionUpdateTime;
-    private Vector2d pos1;
-    private Vector2d pos2;
+    private Vector3 userLastEuler;
     private Coroutine _autoDir;
 
     bool _isInitialized;
 
-    ILocationProvider _locationProvider;
-    ILocationProvider LocationProvider {
-        get {
-            if (_locationProvider == null) {
-                _locationProvider = LocationProviderFactory.Instance.DefaultLocationProvider;
-            }
-
-            return _locationProvider;
-        }
-    }
-
     void Start()
     {
-        LocationProviderFactory.Instance.mapManager.OnInitialized += () => _isInitialized = true;
         debugTF = GameObject.Find("DebugCanvas").GetComponentInChildren<Text>();
-        pos1 = new Vector2d(0, 0);
         Input.location.Start();
         if (!isOnManual) {
-            DisplayOnDBW("Please move forward for around 10m");
-            //_autoDir = StartCoroutine(Automatic());
+            DisplayOnDBW("Please move forward for around 20m");
+            _autoDir = StartCoroutine(Automatic());
         }
     }
 
@@ -48,7 +35,7 @@ public class CameraRotationHandler : MonoBehaviour
     void Update()
     {
         Touch[] myTouches = Input.touches;
-        DisplayOnDBW("Orientation: x:" + user.eulerAngles.x + "y:" + user.eulerAngles.y + "z:" + user.eulerAngles.z);
+        
         if (Input.touchCount == 1 && isOnManual)
             Manual(myTouches);
     }
@@ -62,33 +49,17 @@ public class CameraRotationHandler : MonoBehaviour
     }
 
     IEnumerator Automatic() {
-        int c = 0;
         while (true) {
-            
-            //DisplayOnDBW("dist: " + Vector3.Distance(pos1, pos2));
-            if (_isInitialized) {
-                if (pos1.x == 0 && pos1.y == 0) {
-                    pos1 = LocationProvider.CurrentLocation.LatitudeLongitude;
-                }
-                else {
-                    c += 1;
-                    pos2 = LocationProvider.CurrentLocation.LatitudeLongitude;
-                    double dist = 50000*Vector2d.Distance(pos1, pos2);
-                    if (dist > distanceDeltaReq) {
-                        float dx = (float)(pos1.x - pos2.x);
-                        float dy = (float)(pos1.y - pos2.y);
-                        float ori = -Mathf.Atan2(dx, dy) * Mathf.Rad2Deg;
-                        Vector3 rot = user.transform.eulerAngles;
-                        rot.y = ori;
-                        //user.transform.eulerAngles = rot;
-                        GetComponentInChildren<Camera>().transform.eulerAngles = new Vector3();
-                        transform.forward = rot;
-                        DisplayOnDBW("ori: " + rot.y + " dist: " + dist + " c: " + c);
-                        pos1 = pos2;
+            if (userLastEuler != user.eulerAngles) {
+                // user's direction
+                float Uy = user.eulerAngles.y;
+                // Marker direction from the user
+                float My = Mathf.Rad2Deg * Mathf.Atan2(mapMarker.position.z - user.position.z, mapMarker.position.x - user.position.x) - 30; // the constant should depend on the longitute or latitute
+                Vector3 eul = transform.eulerAngles;
+                eul.y = My - Uy - transform.GetComponentInChildren<Camera>().transform.eulerAngles.y;
+                transform.eulerAngles = eul;
+                DisplayOnDBW(" User orientation: " + Uy+ " camera orientation: " + eul.y);
 
-                    }
-                    //DisplayOnDBW(" dist: " + dist + " c: " + c);
-                }
             }
             yield return new WaitForSeconds(directionUpdateTime);
         }
@@ -103,7 +74,7 @@ public class CameraRotationHandler : MonoBehaviour
         if (isOnManual) {
             StopCoroutine(_autoDir);
         } else {
-            //_autoDir = StartCoroutine(Automatic());
+            _autoDir = StartCoroutine(Automatic());
         }
     }
 }

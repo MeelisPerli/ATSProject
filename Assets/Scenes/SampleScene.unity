@@ -691,9 +691,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sensitivity: -1
-  isOnManual: 1
+  isOnManual: 0
   distanceDeltaReq: 15
   user: {fileID: 819410513}
+  mapMarker: {fileID: 1732529579}
   directionUpdateTime: 1
 --- !u!114 &316080949
 MonoBehaviour:
@@ -2140,6 +2141,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TrackingType
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114963366853050710, guid: c10877f7cd5764de18d46d7b777d1faa,
+        type: 3}
+      propertyPath: m_UseRelativeTransform
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114963366853050710, guid: c10877f7cd5764de18d46d7b777d1faa,
+        type: 3}
+      propertyPath: m_UpdateType
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c10877f7cd5764de18d46d7b777d1faa, type: 3}
