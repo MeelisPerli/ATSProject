@@ -12,7 +12,7 @@ public class CameraRotationHandler : MonoBehaviour
     public float sensitivity;
     public bool isOnManual;
 
-    public float distanceDeltaReq;
+
     public Transform user;
     public Transform mapMarker;
     public float directionUpdateTime;
@@ -56,7 +56,7 @@ public class CameraRotationHandler : MonoBehaviour
                 // Marker direction from the user
                 float My = Mathf.Rad2Deg * Mathf.Atan2(mapMarker.position.z - user.position.z, mapMarker.position.x - user.position.x) - 30; // the constant should depend on the longitute or latitute
                 Vector3 eul = transform.eulerAngles;
-                eul.y = My - Uy - transform.GetComponentInChildren<Camera>().transform.eulerAngles.y;
+                eul.y = My - Uy;
                 transform.eulerAngles = eul;
                 DisplayOnDBW(" User orientation: " + Uy+ " camera orientation: " + eul.y);
 
