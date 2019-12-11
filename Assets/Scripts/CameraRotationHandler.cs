@@ -55,7 +55,7 @@ public class CameraRotationHandler : MonoBehaviour
                 // user's direction
                 float Uy = user.eulerAngles.y;
                 // Marker direction from the user
-                float My = Mathf.Rad2Deg * Mathf.Atan2(mapMarker.position.z - user.position.z, mapMarker.position.x - user.position.x) - 30; // the constant should depend on the longitute or latitute
+                float My = Mathf.Rad2Deg * Mathf.Atan2(mapMarker.position.x - user.position.x, mapMarker.position.z - user.position.z) - 30; // the constant should depend on the longitute or latitute
                 Vector3 eul = transform.eulerAngles;
                 eul.y = Uy - My;
                 transform.eulerAngles = eul;

@@ -8,9 +8,7 @@ public class PathTransformer : MonoBehaviour
 {
 
     public Camera coreDevice;
-    public float ratio;
     public float maxSize;
-    public Slider distslider;
     public Slider sizeSlider;
     public Transform ARmarker;
     public Transform user;
@@ -45,7 +43,7 @@ public class PathTransformer : MonoBehaviour
             ARPath.transform.localScale = new Vector3(sizeSlider.value*maxSize, sizeSlider.value * maxSize, sizeSlider.value * maxSize);
             //pos
             Vector3 pos = coreDevice.transform.position;
-            pos.y = coreDevice.transform.position.y - 130;
+            pos.y = coreDevice.transform.position.y - 200;
             pos.x = 0;
             pos.z = 0;
             ARPath.transform.position = pos;
