@@ -37,12 +37,5 @@ public class TargetLocTransformer : MonoBehaviour
         pos.x += dist * Ratio * slider.value * Mathf.Sin(Mathf.Deg2Rad * a);
         pos.z += dist * Ratio * slider.value * Mathf.Cos(Mathf.Deg2Rad * a);
         rlTarget.transform.position = pos;
-        /*
-        Vector3 pos = CoreDevice.transform.position;
-        pos -= transform.position;
-        pos += target.transform.position * Ratio*slider.value;
-        pos.y = CoreDevice.transform.position.y;
-        rlTarget.transform.position = pos;
-        */
     }
 }

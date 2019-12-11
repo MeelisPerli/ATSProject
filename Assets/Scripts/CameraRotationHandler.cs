@@ -27,7 +27,7 @@ public class CameraRotationHandler : MonoBehaviour
         Input.location.Start();
         if (!isOnManual) {
             DisplayOnDBW("Please move forward for around 20m");
-            //_autoDir = StartCoroutine(Automatic());
+            _autoDir = StartCoroutine(Automatic());
         }
     }
 
@@ -61,7 +61,7 @@ public class CameraRotationHandler : MonoBehaviour
                 transform.eulerAngles = eul;
                 */
                 //DisplayOnDBW(" User orientation: " + Uy+ " camera orientation: " + eul.y);
-                DisplayOnDBW("");
+                DisplayOnDBW(" camera orientation: " + user.eulerAngles.y);
 
             }
             yield return new WaitForSeconds(directionUpdateTime);
@@ -77,6 +77,7 @@ public class CameraRotationHandler : MonoBehaviour
         if (isOnManual) {
             StopCoroutine(_autoDir);
         } else {
+
             _autoDir = StartCoroutine(Automatic());
         }
     }
