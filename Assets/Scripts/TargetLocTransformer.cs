@@ -8,9 +8,8 @@ public class TargetLocTransformer : MonoBehaviour
 
     public GameObject target;
     public GameObject rlTarget;
-    public Camera CoreDevice;
-    public Transform user;
-    public float Ratio;
+    public Camera coreDevice;
+    public float ratio;
 
     public Slider slider;
 
@@ -27,15 +26,23 @@ public class TargetLocTransformer : MonoBehaviour
     }
 
     void moveObject() {
-        
+
+        Vector3 pos = coreDevice.transform.position;
+        pos.x = target.transform.position.x * ratio * slider.value;
+        pos.z = target.transform.position.z * ratio * slider.value;
+        rlTarget.transform.position = pos;
+        /*
         float dist = Vector3.Distance(user.position, target.transform.position);
         float Uy = user.eulerAngles.y;
         float My = Mathf.Rad2Deg * Mathf.Atan2(target.transform.position.z - user.position.z, target.transform.position.x - user.position.x) - 30;
-        float a = My - Uy;
+        float a = Uy - My;
 
         Vector3 pos = CoreDevice.transform.position;
         pos.x += dist * Ratio * slider.value * Mathf.Sin(Mathf.Deg2Rad * a);
         pos.z += dist * Ratio * slider.value * Mathf.Cos(Mathf.Deg2Rad * a);
-        rlTarget.transform.position = pos;
+        rlTarget.transform.position = pos; 
+        */
+
+
     }
 }

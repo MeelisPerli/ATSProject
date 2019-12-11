@@ -51,7 +51,7 @@ public class CameraRotationHandler : MonoBehaviour
     IEnumerator Automatic() {
         while (true) {
             if (userLastEuler != user.eulerAngles) {
-                /*
+                
                 // user's direction
                 float Uy = user.eulerAngles.y;
                 // Marker direction from the user
@@ -59,10 +59,8 @@ public class CameraRotationHandler : MonoBehaviour
                 Vector3 eul = transform.eulerAngles;
                 eul.y = Uy - My;
                 transform.eulerAngles = eul;
-                */
-                //DisplayOnDBW(" User orientation: " + Uy+ " camera orientation: " + eul.y);
-                DisplayOnDBW(" camera orientation: " + user.eulerAngles.y);
-
+                
+                DisplayOnDBW(" User orientation: " + Uy+ " camera orientation: " + eul.y);
             }
             yield return new WaitForSeconds(directionUpdateTime);
         }

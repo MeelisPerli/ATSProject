@@ -12,6 +12,7 @@ public class PathTransformer : MonoBehaviour
     public float maxSize;
     public Slider distslider;
     public Slider sizeSlider;
+    public Transform ARmarker;
     public Transform user;
 
 
@@ -40,27 +41,21 @@ public class PathTransformer : MonoBehaviour
                 ARPath.Destroy();
             }
             ARPath = Instantiate(pathMesh);
+            //size
             ARPath.transform.localScale = new Vector3(sizeSlider.value*maxSize, sizeSlider.value * maxSize, sizeSlider.value * maxSize);
-
-            // updating loc
-            float dist = Vector3.Distance(user.position, ARPath.transform.position);
-            float Uy = user.eulerAngles.y;
-            float My = Mathf.Rad2Deg * Mathf.Atan2(ARPath.transform.position.z - user.position.z, ARPath.transform.position.x - user.position.x) - 30;
-            float a = My - Uy;
-
+            //pos
             Vector3 pos = coreDevice.transform.position;
-            pos.x += dist * ratio * distslider.value * Mathf.Sin(Mathf.Deg2Rad * a);
-            pos.z += dist * ratio * distslider.value * Mathf.Cos(Mathf.Deg2Rad * a);
-            ARPath.transform.position = pos;
-
-            /*
-            Vector3 pos = coreDevice.transform.position;
-            pos -= transform.position;
-            pos += pathMesh.transform.position * ratio * distslider.value;
             pos.y = coreDevice.transform.position.y - 130;
+            pos.x = 0;
+            pos.z = 0;
             ARPath.transform.position = pos;
+            //rot
+            //ARPath.transform.LookAt(ARmarker.position, Vector3.up);
+            
+            
+            /*
             */
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.5f);
             
         }
         ARPath.Destroy();
