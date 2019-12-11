@@ -618,10 +618,9 @@ MonoBehaviour:
   target: {fileID: 633987594}
   rlTarget: {fileID: 1647953652}
   coreDevice: {fileID: 1985308840}
-  user: {fileID: 819410513}
   ratio: 75
   slider: {fileID: 2030171784}
---- !u!114 &316080950
+--- !u!114 &316080952
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -636,7 +635,6 @@ MonoBehaviour:
   target: {fileID: 903642740}
   rlTarget: {fileID: 316080947}
   coreDevice: {fileID: 1985308840}
-  user: {fileID: 819410513}
   ratio: 75
   slider: {fileID: 2030171784}
 --- !u!1 &326229339
@@ -1236,7 +1234,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &659805236
 Transform:
   m_ObjectHideFlags: 0
