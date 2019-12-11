@@ -1592,6 +1592,7 @@ MonoBehaviour:
   maxSize: 50
   distslider: {fileID: 2030171784}
   sizeSlider: {fileID: 922195932}
+  user: {fileID: 819410513}
 --- !u!1 &791672093
 GameObject:
   m_ObjectHideFlags: 0
